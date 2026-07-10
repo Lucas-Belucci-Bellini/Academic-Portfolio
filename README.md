@@ -1,3 +1,51 @@
+# 🎓 Universal Academic Portfolio | Vibe Code ✨
+
+> A premium, minimalist, and high-performance portfolio template designed for university students to stand out in the job market.
+
+![Project Preview](link-to-your-image-or-gif-here.gif)
+
+The job market doesn't just want to see your degree; it wants to see what you are capable of building. This repository contains the source code for a modern academic portfolio, focused on clean aesthetics, fluid animations (the famous *vibe code*), and high conversion of opportunities. Ideal for students in Computer Science, Engineering, Law, Medicine, and other fields.
+
+---
+
+## 🚀 Features
+
+*   **Premium Design (Vibe Code):** UI/UX-focused interface, with a sophisticated color palette and ideal contrast.
+*   **Fully Responsive:** Flawless experience on desktops, tablets, and smartphones.
+*   **Fluid Animations:** Smooth transitions and *scroll reveals* to keep recruiters engaged.
+*   **Dynamic Course Filter:** Interactive tabs that adapt the content (projects and skills) according to your field.
+*   **Integrated Sections:** Hero, About, Featured Projects, Hard/Soft Skills, and Contact.
+
+---
+
+## 🛠️ Technologies Used
+
+*   **Front-end:** [Replace with React, Next.js, or HTML/CSS]
+*   **Styling:** [Replace with Tailwind CSS, Styled Components, etc.]
+*   **Icons & Animations:** [Replace with Lucide React, Framer Motion, etc.]
+
+---
+
+## 💼 Don't know how to code? Want an exclusive portfolio?
+
+If you are not from the tech area or simply want a **ready-to-use, exclusive solution hosted on your own domain** (e.g., *www.yourname.com*), I can do this for you!
+
+I create personalized and advanced versions of this portfolio, 100% adapted to your field, with real contact forms and optimized SEO so you can be found by recruiters.
+
+👉 **[Click here to request a quote and elevate your career]** *(Insert your WhatsApp, LinkedIn, or Form link)*
+
+---
+
+## 💻 How to Use (For Developers)
+
+If you are a developer and want to use the base version of this template, feel free to clone the repository:
+
+1. Clone the project:
+   ```bash
+   git clone [https://github.com/YourUsernameHere/repository-name.git](https://github.com/YourUsernameHere/repository-name.git)
+
+
+
 # 🎓 Portfólio Acadêmico Universal | Vibe Code ✨
 
 > Um template de portfólio premium, minimalista e de alto desempenho projetado para estudantes universitários se destacarem no mercado de trabalho.
