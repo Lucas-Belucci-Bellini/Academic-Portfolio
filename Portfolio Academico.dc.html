@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; padding: 0; background: #0B0F17; }
+body { -webkit-font-smoothing: antialiased; }
+a { color: #7EA6FF; text-decoration: none; transition: color .2s ease; }
+a:hover { color: #A9C4FF; }
+::selection { background: rgba(79,134,247,.35); }
+@keyframes heroIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#0B0F17;color:#E6EAF2;font-family:Manrope,sans-serif">
+
+  <!-- NAV -->
+  <nav data-screen-label="Navegação" style="display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:22px 28px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#4F86F7,#2E5BBF);display:flex;align-items:center;justify-content:center;font:700 14px Sora,sans-serif;color:#fff">P</div>
+      <span style="font:600 15px Sora,sans-serif;letter-spacing:.01em">Portfólio Acadêmico</span>
+    </div>
+    <a href="mailto:contato@portfolio.dev" style="font-size:14px;font-weight:600;color:#94A3B8">Contato</a>
+  </nav>
+
+  <!-- HERO -->
+  <header data-screen-label="Hero" style="max-width:1120px;margin:0 auto;padding:56px 28px 40px;animation:heroIn .5s ease both">
+    <div style="opacity:{{fadeOpacity}};transform:translateY({{fadeShift}});transition:opacity .22s ease,transform .22s ease">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(148,163,184,.2);border-radius:999px;font-size:12.5px;font-weight:600;color:#94A3B8;margin-bottom:24px">
+        <span style="width:7px;height:7px;border-radius:50%;background:#34D399;display:inline-block"></span>
+        Disponível para estágio · 2026
+      </div>
+      <h1 style="margin:0 0 14px;font:700 clamp(2.3rem,6vw,3.7rem)/1.08 Sora,sans-serif;letter-spacing:-.02em">{{name}}</h1>
+      <p style="margin:0 0 18px;font-size:clamp(1.05rem,2.2vw,1.3rem);font-weight:600;color:#CBD5E1">
+        Estudante de <span style="color:#7EA6FF">{{course}}</span>
+        <span style="color:#475569"> · </span>
+        Foco em {{focus}}
+      </p>
+      <p style="margin:0 0 32px;max-width:620px;font-size:16px;line-height:1.7;color:#94A3B8">{{about}}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <button onClick="{{noop}}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border:none;border-radius:12px;background:#4F86F7;color:#fff;font:700 15px Manrope,sans-serif;cursor:pointer;transition:background .2s ease,transform .2s ease" style-hover="background:#3D74E5;transform:translateY(-2px)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Baixar Currículo
+        </button>
+        <button onClick="{{scrollToProjects}}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border:1px solid rgba(148,163,184,.3);border-radius:12px;background:transparent;color:#E6EAF2;font:700 15px Manrope,sans-serif;cursor:pointer;transition:border-color .2s ease,background .2s ease" style-hover="border-color:#4F86F7;background:rgba(79,134,247,.08)">
+          Ver Projetos
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SELETOR DE CURSOS -->
+  <div data-screen-label="Seletor de Cursos" style="position:sticky;top:0;z-index:50;background:rgba(11,15,23,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(148,163,184,.1);border-bottom:1px solid rgba(148,163,184,.1)">
+    <div style="max-width:1120px;margin:0 auto;padding:14px 28px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#64748B;margin-right:8px">PERFIL:</span>
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6">
+        <button onClick="{{t.select}}" style="padding:9px 17px;border-radius:999px;border:1px solid {{t.border}};background:{{t.bg}};color:{{t.color}};font:600 13.5px Manrope,sans-serif;cursor:pointer;transition:all .25s ease;white-space:nowrap" style-hover="border-color:rgba(124,156,255,.55)">{{t.label}}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO DINÂMICO -->
+  <main style="opacity:{{fadeOpacity}};transform:translateY({{fadeShift}});transition:opacity .22s ease,transform .22s ease">
+
+    <!-- PROJETOS -->
+    <section id="projetos" data-screen-label="Projetos" style="max-width:1120px;margin:0 auto;padding:64px 28px 24px">
+      <p style="margin:0 0 10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#7EA6FF">PROJETOS &amp; EXPERIÊNCIA</p>
+      <h2 style="margin:0 0 36px;font:700 clamp(1.6rem,3.5vw,2.2rem) Sora,sans-serif;letter-spacing:-.01em">Trabalhos em destaque</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px">
+        <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+          <article style="display:flex;flex-direction:column;gap:12px;padding:26px;background:#111827;border:1px solid rgba(148,163,184,.14);border-radius:16px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-6px);border-color:rgba(124,156,255,.5);box-shadow:0 20px 44px rgba(0,0,0,.4)">
+            <span style="font:500 11.5px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#7EA6FF">{{p.tag}}</span>
+            <h3 style="margin:0;font:600 18.5px/1.35 Sora,sans-serif">{{p.title}}</h3>
+            <p style="margin:0;font-size:14.5px;line-height:1.65;color:#94A3B8">{{p.desc}}</p>
+            <div style="margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#CBD5E1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              {{p.meta}}
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section data-screen-label="Habilidades" style="max-width:1120px;margin:0 auto;padding:56px 28px 72px">
+      <p style="margin:0 0 10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#7EA6FF">HABILIDADES</p>
+      <h2 style="margin:0 0 36px;font:700 clamp(1.6rem,3.5vw,2.2rem) Sora,sans-serif;letter-spacing:-.01em">Hard &amp; Soft Skills</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <h3 style="margin:0;font:600 15px Sora,sans-serif;color:#CBD5E1">Hard Skills</h3>
+          <sc-for list="{{hardSkills}}" as="s" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600">
+                <span>{{s.name}}</span>
+                <span style="color:#7EA6FF;font-family:'JetBrains Mono',monospace;font-size:12.5px">{{s.pct}}</span>
+              </div>
+              <div style="height:6px;border-radius:999px;background:rgba(148,163,184,.15);overflow:hidden">
+                <div style="height:100%;width:{{s.width}};border-radius:999px;background:linear-gradient(90deg,#4F86F7,#7EA6FF);transition:width .6s cubic-bezier(.22,1,.36,1)"></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <h3 style="margin:0;font:600 15px Sora,sans-serif;color:#CBD5E1">Soft Skills</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start">
+            <sc-for list="{{softSkills}}" as="ss" hint-placeholder-count="5">
+              <span style="padding:9px 16px;border:1px solid rgba(148,163,184,.22);border-radius:999px;font-size:13.5px;font-weight:600;color:#CBD5E1;transition:border-color .2s ease,color .2s ease" style-hover="border-color:#4F86F7;color:#E6EAF2">{{ss.label}}</span>
+            </sc-for>
+          </div>
+          <div style="margin-top:8px;padding:20px 22px;background:#111827;border:1px solid rgba(148,163,184,.14);border-radius:14px">
+            <p style="margin:0;font-size:14px;line-height:1.65;color:#94A3B8">{{skillsNote}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer data-screen-label="Rodapé" style="border-top:1px solid rgba(148,163,184,.12)">
+    <div style="max-width:1120px;margin:0 auto;padding:36px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px">
+      <div>
+        <p style="margin:0 0 4px;font:600 15px Sora,sans-serif">{{name}}</p>
+        <p style="margin:0;font-size:13px;color:#64748B">© 2026 · Portfólio Acadêmico Universal</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:22px">
+        <a href="https://linkedin.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#94A3B8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"></path></svg>
+          LinkedIn
+        </a>
+        <a href="https://lattes.cnpq.br" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#94A3B8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          {{platformLabel}}
+        </a>
+        <a href="mailto:contato@portfolio.dev" style="display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#94A3B8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          E-mail
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;defaultCourse&quot;: {
+    &quot;editor&quot;: &quot;enum&quot;,
+    &quot;options&quot;: [&quot;computacao&quot;, &quot;engsoft&quot;, &quot;contabeis&quot;, &quot;medicina&quot;, &quot;engenharia&quot;, &quot;direito&quot;],
+    &quot;default&quot;: &quot;computacao&quot;,
+    &quot;tsType&quot;: &quot;string&quot;,
+    &quot;section&quot;: &quot;Conteúdo&quot;
+  },
+  &quot;showPercentages&quot;: {
+    &quot;editor&quot;: &quot;boolean&quot;,
+    &quot;default&quot;: true,
+    &quot;tsType&quot;: &quot;boolean&quot;,
+    &quot;section&quot;: &quot;Conteúdo&quot;
+  },
+  &quot;autoCycle&quot;: {
+    &quot;editor&quot;: &quot;boolean&quot;,
+    &quot;default&quot;: false,
+    &quot;tsType&quot;: &quot;boolean&quot;,
+    &quot;section&quot;: &quot;Demonstração&quot;
+  }
+}">
+class Component extends DCLogic {
+  state = { active: null, visible: true };
+
+  data = {
+    computacao: {
+      label: "Ciência da Computação",
+      name: "Lucas Andrade",
+      course: "Ciência da Computação",
+      focus: "Inteligência Artificial",
+      platform: "GitHub",
+      about: "Desenvolvo modelos de machine learning e soluções algorítmicas com foco em problemas reais. Contribuo em projetos open-source e participo de maratonas de programação (ICPC) desde o 2º semestre.",
+      skillsNote: "Diferencial: 3 repositórios com mais de 100 estrelas no GitHub e finalista regional da Maratona de Programação ICPC 2025.",
+      projects: [
+        { tag: "MACHINE LEARNING", title: "NeuroClassify — Triagem de imagens médicas", desc: "Classificador de imagens com CNN em PyTorch, 94% de acurácia em dataset público de radiografias. Deploy com API REST e interface web.", meta: "github.com/lucasandrade" },
+        { tag: "ALGORITMOS", title: "PathFinder Visualizer", desc: "Visualizador interativo de algoritmos de busca (A*, Dijkstra, BFS) usado como material didático pela disciplina de Grafos da universidade.", meta: "Demo online + repositório" },
+        { tag: "INICIAÇÃO CIENTÍFICA", title: "NLP para Português Brasileiro", desc: "Pesquisa de IC com bolsa PIBIC: fine-tuning de modelos de linguagem para análise de sentimento em textos jurídicos brasileiros.", meta: "Artigo aceito no BRACIS 2025" }
+      ],
+      hardSkills: [
+        { name: "Python", level: 90 },
+        { name: "Machine Learning / PyTorch", level: 80 },
+        { name: "C/C++ e Estruturas de Dados", level: 75 },
+        { name: "SQL e Bancos de Dados", level: 70 }
+      ],
+      softSkills: ["Pensamento analítico", "Resolução de problemas", "Comunicação técnica", "Colaboração open-source", "Aprendizado contínuo"]
+    },
+    engsoft: {
+      label: "Eng. de Software",
+      name: "Mariana Costa",
+      course: "Engenharia de Software",
+      focus: "Arquitetura Full-Stack",
+      platform: "GitHub",
+      about: "Construo aplicações full-stack com atenção a arquitetura limpa, testes e entrega contínua. Experiência prática com metodologias ágeis liderando squads em projetos de extensão universitária.",
+      skillsNote: "Diferencial: certificação Scrum Foundation e liderança de uma squad de 6 pessoas em projeto real para ONG local.",
+      projects: [
+        { tag: "FULL-STACK", title: "CampusHub — App de vida universitária", desc: "Plataforma React + Node.js com arquitetura de microsserviços: eventos, caronas e marketplace entre estudantes. 1.200 usuários ativos.", meta: "github.com/marianacosta" },
+        { tag: "ARQUITETURA", title: "API de Pagamentos — Arquitetura Hexagonal", desc: "API de simulação de pagamentos com ports & adapters, cobertura de testes de 92% e pipeline CI/CD completo com Docker e GitHub Actions.", meta: "Estudo de caso documentado" },
+        { tag: "METODOLOGIAS ÁGEIS", title: "Scrum na Prática — Projeto de Extensão", desc: "Gestão ágil do desenvolvimento de um sistema de doações para ONG: cerimônias, burndown e releases quinzenais durante 2 semestres.", meta: "Case publicado no Medium" }
+      ],
+      hardSkills: [
+        { name: "JavaScript / TypeScript", level: 85 },
+        { name: "React e Node.js", level: 80 },
+        { name: "Metodologias Ágeis (Scrum)", level: 90 },
+        { name: "Docker e CI/CD", level: 70 }
+      ],
+      softSkills: ["Trabalho em equipe", "Liderança de squad", "Comunicação", "Gestão de prazos", "Code review construtivo"]
+    },
+    contabeis: {
+      label: "Ciências Contábeis",
+      name: "Rafael Nogueira",
+      course: "Ciências Contábeis",
+      focus: "Análise de Dados Financeiros",
+      platform: "Lattes",
+      about: "Transformo dados contábeis em decisões: dashboards financeiros, análise de demonstrações e auditoria. Domínio avançado de Excel e Power BI aplicado a casos reais de empresa júnior.",
+      skillsNote: "Diferencial: consultor da Empresa Júnior de Contabilidade com 8 clientes atendidos e aprovação no exame de suficiência do CFC (simulado).",
+      projects: [
+        { tag: "POWER BI", title: "Dashboard Financeiro — DRE Interativa", desc: "Painel executivo em Power BI com DRE, fluxo de caixa e indicadores de liquidez, alimentado por ETL automatizado a partir de planilhas de ERP.", meta: "Portfólio de dashboards" },
+        { tag: "AUDITORIA", title: "Relatório de Auditoria Simulada", desc: "Auditoria completa de uma empresa fictícia: papéis de trabalho, testes substantivos e parecer final, seguindo normas NBC TA.", meta: "Projeto da disciplina de Auditoria" },
+        { tag: "EXTENSÃO", title: "Planejamento Tributário para MEIs", desc: "Projeto de extensão que orientou 40 microempreendedores locais sobre regime tributário, precificação e obrigações acessórias.", meta: "Certificado de extensão · 60h" }
+      ],
+      hardSkills: [
+        { name: "Excel Avançado", level: 95 },
+        { name: "Power BI", level: 85 },
+        { name: "Análise de DRE e Balanços", level: 80 },
+        { name: "SPED / Sistemas ERP", level: 70 }
+      ],
+      softSkills: ["Atenção a detalhes", "Ética profissional", "Comunicação de dados", "Organização", "Visão de negócio"]
+    },
+    medicina: {
+      label: "Medicina",
+      name: "Beatriz Salles",
+      course: "Medicina",
+      focus: "Pesquisa Clínica e Cardiologia",
+      platform: "Lattes",
+      about: "Estudante de medicina com trajetória em pesquisa clínica e extensão. Diretora de liga acadêmica, autora de artigo publicado e apresentadora de trabalhos em congressos nacionais.",
+      skillsNote: "Diferencial: 1 artigo publicado em revista indexada, 3 pôsteres apresentados em congressos e 200h de estágio extracurricular em UBS.",
+      projects: [
+        { tag: "ARTIGO CIENTÍFICO", title: "Fatores de risco cardiovascular em universitários", desc: "Estudo transversal com 480 participantes, publicado em revista indexada (Qualis B1). Primeira autora, com análise estatística em R.", meta: "DOI · Revista Brasileira de Cardiologia" },
+        { tag: "LIGA ACADÊMICA", title: "Diretora — Liga de Cardiologia (LAC)", desc: "Organização de 12 aulas abertas, 2 mutirões de aferição de pressão arterial e simpósio anual com 300 inscritos.", meta: "Gestão 2025–2026" },
+        { tag: "ESTÁGIO CLÍNICO", title: "Estágio extracurricular — UBS Vila Nova", desc: "200 horas de acompanhamento em atenção primária: anamnese supervisionada, acolhimento e campanhas de vacinação.", meta: "Congresso COMU 2025 · pôster" }
+      ],
+      hardSkills: [
+        { name: "Suporte Básico de Vida (BLS)", level: 90 },
+        { name: "Semiologia e Anamnese", level: 85 },
+        { name: "Metodologia de Pesquisa / R", level: 80 },
+        { name: "Inglês Científico", level: 85 }
+      ],
+      softSkills: ["Empatia", "Comunicação com pacientes", "Trabalho sob pressão", "Ética médica", "Trabalho multidisciplinar"]
+    },
+    engenharia: {
+      label: "Engenharia",
+      name: "Gustavo Lima",
+      course: "Engenharia Mecânica",
+      focus: "Projetos Estruturais e Robótica",
+      platform: "Lattes",
+      about: "Projeto, calculo e prototipo: da modelagem 3D em SolidWorks à robótica com Arduino. Membro da equipe Baja SAE da universidade, responsável pelo subsistema de chassi.",
+      skillsNote: "Diferencial: 2ª colocação regional na competição Baja SAE 2025 e monitor da disciplina de Resistência dos Materiais.",
+      projects: [
+        { tag: "SOLIDWORKS", title: "Chassi Baja SAE — Projeto e Análise", desc: "Modelagem completa do chassi tubular em SolidWorks com análise de elementos finitos (FEA), redução de 12% no peso mantendo rigidez.", meta: "Equipe Baja SAE · subsistema chassi" },
+        { tag: "ROBÓTICA", title: "Braço Robótico com Arduino", desc: "Braço de 4 graus de liberdade com cinemática inversa, controle por potenciômetros e modo de gravação de movimentos. Peças impressas em 3D.", meta: "Feira de projetos · 1º lugar" },
+        { tag: "CÁLCULO ESTRUTURAL", title: "Passarela de Pedestres — Projeto em AutoCAD", desc: "Dimensionamento de passarela metálica de 18 m: memorial de cálculo, detalhamento em AutoCAD e verificação por norma NBR 8800.", meta: "Projeto integrador · nota máxima" }
+      ],
+      hardSkills: [
+        { name: "AutoCAD", level: 90 },
+        { name: "SolidWorks / FEA", level: 85 },
+        { name: "Arduino e Robótica", level: 75 },
+        { name: "MATLAB", level: 70 }
+      ],
+      softSkills: ["Gestão de projetos", "Trabalho em equipe", "Raciocínio espacial", "Rigor técnico", "Prototipagem rápida"]
+    },
+    direito: {
+      label: "Direito",
+      name: "Camila Ferreira",
+      course: "Direito",
+      focus: "Direito Digital e Oratória",
+      platform: "Lattes",
+      about: "Estudante de Direito com atuação em júri simulado, pesquisa em jurisprudência e produção de artigos jurídicos. Interesse especial em proteção de dados e direito digital.",
+      skillsNote: "Diferencial: melhor oradora do Júri Simulado Interuniversitário 2025 e estagiária do Núcleo de Prática Jurídica com 15 atendimentos reais.",
+      projects: [
+        { tag: "JÚRI SIMULADO", title: "Júri Simulado Interuniversitário — Melhor Oradora", desc: "Defesa em caso simulado de homicídio qualificado: construção de tese, sustentação oral de 40 minutos e prêmio de melhor oradora entre 12 equipes.", meta: "Competição 2025 · 1º lugar individual" },
+        { tag: "ARTIGO JURÍDICO", title: "LGPD e o consentimento em aplicativos de saúde", desc: "Artigo publicado em revista acadêmica da faculdade analisando 30 termos de uso à luz da LGPD e da jurisprudência recente do STJ.", meta: "Revista Acadêmica de Direito · v.14" },
+        { tag: "PESQUISA", title: "Jurisprudência comparada — responsabilidade civil de plataformas", desc: "Levantamento de 120 acórdãos (STJ e TJs) sobre responsabilidade de marketplaces, com fichamento sistematizado e relatório analítico.", meta: "Grupo de pesquisa · NPJ" }
+      ],
+      hardSkills: [
+        { name: "Pesquisa Jurisprudencial", level: 90 },
+        { name: "Oratória e Sustentação Oral", level: 90 },
+        { name: "Redação Jurídica", level: 85 },
+        { name: "Direito Digital / LGPD", level: 75 }
+      ],
+      softSkills: ["Argumentação", "Negociação", "Escuta ativa", "Ética", "Pensamento crítico"]
+    }
+  };
+
+  order = ["computacao", "engsoft", "contabeis", "medicina", "engenharia", "direito"];
+
+  componentDidMount() {
+    if (this.props.autoCycle) {
+      this._cycle = setInterval(() => {
+        const cur = this.getActive();
+        const next = this.order[(this.order.indexOf(cur) + 1) % this.order.length];
+        this.selectCourse(next);
+      }, 5000);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._cycle);
+    clearTimeout(this._swap);
+  }
+
+  getActive() {
+    return this.state.active ?? (this.props.defaultCourse ?? "computacao");
+  }
+
+  selectCourse(id) {
+    if (id === this.getActive()) return;
+    this.setState({ visible: false });
+    clearTimeout(this._swap);
+    this._swap = setTimeout(() => {
+      this.setState({ active: id, visible: true });
+    }, 230);
+  }
+
+  renderVals() {
+    const active = this.getActive();
+    const p = this.data[active];
+    const showPct = this.props.showPercentages ?? true;
+
+    const tabs = this.order.map((id) => {
+      const on = id === active;
+      return {
+        label: this.data[id].label,
+        select: () => this.selectCourse(id),
+        bg: on ? "rgba(79,134,247,.16)" : "transparent",
+        color: on ? "#A9C4FF" : "#94A3B8",
+        border: on ? "rgba(79,134,247,.6)" : "rgba(148,163,184,.22)"
+      };
+    });
+
+    return {
+      name: p.name,
+      course: p.course,
+      focus: p.focus,
+      about: p.about,
+      skillsNote: p.skillsNote,
+      platformLabel: p.platform,
+      tabs,
+      projects: p.projects,
+      hardSkills: p.hardSkills.map((s) => ({
+        name: s.name,
+        pct: showPct ? s.level + "%" : "",
+        width: s.level + "%"
+      })),
+      softSkills: p.softSkills.map((label) => ({ label })),
+      fadeOpacity: this.state.visible ? "1" : "0",
+      fadeShift: this.state.visible ? "0px" : "12px",
+      noop: () => {},
+      scrollToProjects: () => {
+        const el = document.getElementById("projetos");
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: "smooth" });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
